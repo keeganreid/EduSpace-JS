@@ -1,25 +1,38 @@
-import React, {useState} from 'react';
-import {collection} from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../lib/init-firebase';
 
-export default function ListUsers(){
-
+export default function ListUsers() {
   const [users, setUsers] = useState([]);
 
-  function getUsers(){
-    const 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  function getUsers() {
+    const userCol = collection(db, 'user');
+    getDocs(userCol)
+      .then((response) => {
+        const user = response.docs.map((doc) => ({
+          data: doc.data(),
+          id: doc.id,
+        }));
+        setUsers(user);
+      })
+      .catch((error) => console.log(error.message));
   }
 
-  const userCol = collection(db, 'user'); //referencing user collection in firestore
-//do the same for every database collection (which resembles a database table)
+  //referencing user collection in firestore
+  //do the same for every database collection (which resembles a database table)
 
-getDocs(userCol).then((snapshot) => {
-  console.log(snapshot.docs);
-});
-
+  return (
+    <div>
+      <h2>Awe</h2>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.data.name} {user.data.email}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-
-return(
-  <div>
-    <h2>Awe</h2>
-     </div>
-)
