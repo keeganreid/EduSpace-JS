@@ -27,7 +27,7 @@ export default function ListUsers() {
 
   return (
     <div>
-      <h2>Awe</h2>
+      <h2>Awe PE</h2>
       <ul>
         {users.map((user) => (
           <li key={user.id}>{user.data.name} {user.data.email}</li>
