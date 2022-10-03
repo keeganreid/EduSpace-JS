@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../lib/init-firebase';
+import '../src/style.css';
 
 export default function ListUsers() {
   const [users, setUsers] = useState([]);
@@ -30,7 +31,9 @@ export default function ListUsers() {
       <h2>Awe</h2>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.data.name} {user.data.email}</li>
+          <li key={user.id}>
+            {user.data.name} {user.data.email}
+          </li>
         ))}
       </ul>
     </div>

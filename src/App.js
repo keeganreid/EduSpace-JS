@@ -1,12 +1,14 @@
 import React from 'react';
 import './style.css';
 import Pages from '../pages/pages';
-import ListUsers from '../components/listUsers';
+import { BrowserRouter } from 'react-router-dom';
+import SideBar from '../components/sideBar';
 
 export default function App() {
   return (
-    <div>
-      <ListUsers />
-    </div>
+    <BrowserRouter>
+      <SideBar />
+      <Pages />
+    </BrowserRouter>
   );
 }
